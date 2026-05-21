@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Space IMPACT</title>
+<title>Space Shooter</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
@@ -148,7 +148,7 @@
   <canvas id="c"></canvas>
 
   <div id="overlay">
-    <h1 id="ol-title">SPACE IMPACT</h1>
+    <h1 id="ol-title">SPACE Shooter</h1>
     <div class="big-score" id="ol-score" style="display:none"></div>
     <p id="ol-body">Use ARROW KEYS to move<br>SPACE to shoot<br>Collect power-ups!</p>
     <div class="blink" id="ol-press">PRESS SPACE TO START</div>
@@ -737,7 +737,7 @@ function draw() {
 
 // ─── Menu screen ───
 function showMenu() {
-  olTitle.textContent = 'SPACE IMPACT';
+  olTitle.textContent = 'SPACE Shooter';
   olScore.style.display = 'none';
   olBody.innerHTML = 'ARROW KEYS — move<br>SPACE — fire<br><br>Collect power-ups!<br>Survive as long as you can!';
   olPress.textContent = 'PRESS SPACE TO START';
