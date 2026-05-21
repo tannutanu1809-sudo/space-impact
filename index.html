@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Space GAME</title>
+<title>Space IMPACT</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
@@ -34,7 +34,7 @@
     user-select: none;
   }
 
-  #game-wrapper {
+  #IMPACT-wrapper {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -138,7 +138,7 @@
 </head>
 <body>
 
-<div id="game-wrapper">
+<div id="IMPACT-wrapper">
   <div id="hud">
     <div>SCORE: <span id="score-display">0</span></div>
     <div>LV: <span id="level-display">1</span></div>
@@ -148,7 +148,7 @@
   <canvas id="c"></canvas>
 
   <div id="overlay">
-    <h1 id="ol-title">SPACE GAME</h1>
+    <h1 id="ol-title">SPACE IMPACT</h1>
     <div class="big-score" id="ol-score" style="display:none"></div>
     <p id="ol-body">Use ARROW KEYS to move<br>SPACE to shoot<br>Collect power-ups!</p>
     <div class="blink" id="ol-press">PRESS SPACE TO START</div>
@@ -196,7 +196,7 @@ resize();
 window.addEventListener('resize', resize);
 
 // ─── State ───
-let state = 'menu'; // menu | playing | dead | gameover
+let state = 'menu'; // menu | playing | dead | IMPACTover
 let score = 0, hiScore = 0, lives = 3, level = 1;
 let frame = 0;
 let paused = false;
@@ -207,7 +207,7 @@ document.addEventListener('keydown', e => {
   keys[e.code] = true;
   if (e.code === 'Space') {
     e.preventDefault();
-    if (state === 'menu' || state === 'gameover') startGame();
+    if (state === 'menu' || state === 'IMPACTover') startIMPACT();
     else if (state === 'dead') respawn();
   }
   if (e.code === 'ArrowUp' || e.code === 'ArrowDown') e.preventDefault();
@@ -227,7 +227,7 @@ mobileBtn('btn-down', 'ArrowDown');
 mobileBtn('btn-left', 'ArrowLeft');
 mobileBtn('btn-right', 'ArrowRight');
 document.getElementById('btn-fire').addEventListener('pointerdown', () => {
-  if (state === 'menu' || state === 'gameover') startGame();
+  if (state === 'menu' || state === 'IMPACTover') startIMPACT();
   else if (state === 'dead') respawn();
   else keys['Space'] = true;
 });
@@ -507,11 +507,11 @@ function rectsOverlap(a, b) {
          a.y < b.y + b.h && a.y + a.h > b.y;
 }
 
-// ─── Game logic ───
+// ─── IMPACT logic ───
 let spawnTimer = 0, spawnRate = 80;
 let levelScore = 0, levelTarget = 200;
 
-function startGame() {
+function startIMPACT() {
   score = 0; lives = 3; level = 1;
   levelScore = 0; levelTarget = 200;
   player = makePlayer();
@@ -544,9 +544,9 @@ function playerDied() {
   updateHUD();
   if (lives <= 0) {
     if (score > hiScore) hiScore = score;
-    state = 'gameover';
+    state = 'IMPACTover';
     overlay.classList.remove('hidden');
-    olTitle.textContent = 'GAME OVER';
+    olTitle.textContent = 'IMPACT OVER';
     olScore.style.display = 'block';
     olScore.textContent = `SCORE: ${score}  HI: ${hiScore}`;
     olBody.innerHTML = '';
@@ -713,7 +713,7 @@ function draw() {
   powerups.forEach(drawPowerup);
   enemies.forEach(drawEnemy);
 
-  if (state === 'playing' || state === 'dead' || state === 'gameover') {
+  if (state === 'playing' || state === 'dead' || state === 'IMPACTover') {
     drawBullets();
     if (state === 'playing') drawPlayer(player);
   }
@@ -737,7 +737,7 @@ function draw() {
 
 // ─── Menu screen ───
 function showMenu() {
-  olTitle.textContent = 'SPACE GAME';
+  olTitle.textContent = 'SPACE IMPACT';
   olScore.style.display = 'none';
   olBody.innerHTML = 'ARROW KEYS — move<br>SPACE — fire<br><br>Collect power-ups!<br>Survive as long as you can!';
   olPress.textContent = 'PRESS SPACE TO START';
